@@ -1,0 +1,113 @@
+.auth-form {
+  width: 26rem;
+  height: max-content;
+  background: #ffffff;
+  border: 2px solid rgba(26, 59, 88, 0.24);
+  border-radius: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem;
+  justify-content: center;
+}
+.authpage .bar {
+  width: 100%;
+}
+.bar ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 48%;
+}
+.authpage {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100vh;
+}
+
+.authpage img {
+  width: 477px;
+  height: 420px;
+  object-fit: cover;
+}
+.hr {
+  width: 314px;
+  height: 0px;
+  left: 886px;
+  top: 290px;
+
+  border: 1px solid rgba(64, 145, 223, 0.12);
+}
+.ingo {
+  width: 76%;
+}
+.authpage form {
+  width: 76%;
+  height: 38%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.bar ul li {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  color: #1a3b58;
+}
+.authpage .info h4 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 21px;
+}
+
+.authpage .info p {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 10px;
+}
+.authpage input {
+  width: 314px;
+  height: 45px;
+  font-family: 'Poppins';
+  padding-left: 25px;
+  left: 886px;
+  top: 401px;
+
+  background: #ffffff;
+  border: 1px solid #cbdbea;
+  border-radius: 8px;
+}
+.authpage form button {
+  background: #329c89;
+  border-radius: 8px;
+  width: 314px;
+  height: 45px;
+  border: 1px solid transparent;
+  color: white;
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: 600;
+}
+.ingo h4 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+}
+.ingo p {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 15px;
+  /* identical to box height */
+  position: relative;
+  bottom: 12px;
+  color: #999999;
+}
