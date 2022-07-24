@@ -23,7 +23,9 @@
     font-weight: 500;
 }
 .titleinput{
-    
+    border-radius: 6px;
+    margin-bottom:10px;
+    margin-top: 12px;
     width: 100%;
     height: 36px;
     font-family: 'Poppins';
@@ -69,6 +71,7 @@
 }
 .writer-name p,
 .desc {
+    word-break: break-all;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;

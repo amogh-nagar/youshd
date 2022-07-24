@@ -20,12 +20,16 @@ import user4 from "../../assets/users/user4.png";
 import user5 from "../../assets/users/user5.png";
 import user6 from "../../assets/users/user6.png";
 import Projects from "../../components/Projects/Projects";
-
+import {useSelector} from 'react-redux'
 function Home() {
   const dispatch = useDispatch();
   const handlelogout = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("password");
     dispatch(authActions.logout());
   };
+  
+  const auth = useSelector((state) => state.auth);
   const [usersmodal, setusersmodal] = useState(false);
   const projectmembers = [
     {
@@ -58,11 +62,11 @@ function Home() {
       email: "himanshu@idc.com",
     },
     {
-        src: user7,
-  
-        name: "Alex",
-        email: "alex@idc.com",
-      },
+      src: user7,
+
+      name: "Alex",
+      email: "alex@idc.com",
+    },
   ];
   return (
     <div className="home">
@@ -77,21 +81,35 @@ function Home() {
               <img src={statsimg} />
               <p>Stats</p>
             </li>
-            <li>
-              <img
+            <li
+              style={{
+                justifyContent: "space-between",
+                width: "91%",
+              }}
+            >
+              <div
                 style={{
-                  objectFit: "contain",
-                }}
-                src={projectsimg}
-              />
-              <p
-                style={{
-                  fontWeight: 500,
-                  color: "#212121",
+                  display: "flex",
+                  alignItems: "center",
+                  columnGap: "24px",
                 }}
               >
-                Projects
-              </p>
+                <img
+                  style={{
+                    objectFit: "contain",
+                  }}
+                  src={projectsimg}
+                />
+                <p
+                  style={{
+                    fontWeight: 500,
+                    color: "#212121",
+                  }}
+                >
+                  Projects
+                </p>
+              </div>
+              <div className="active-bar"></div>
             </li>
             <li>
               <img src={chatimg} />
@@ -126,9 +144,10 @@ function Home() {
             onClick={() => setusersmodal(true)}
             className="users"
             src={usersicon}
+            style={{ cursor: "pointer" }}
           />
           <div className="user-name">
-            <p>Hi Amogh</p>
+            <p>Hi {auth.name}</p>
             <img src={usericon} />
           </div>
         </div>
@@ -139,7 +158,11 @@ function Home() {
           <div className="users-modal">
             <div className="users-modal-nav">
               <p>Project Members</p>
-              <img onClick={()=>setusersmodal(false)} src={crossicon} />
+              <img
+                style={{ cursor: "pointer" }}
+                onClick={() => setusersmodal(false)}
+                src={crossicon}
+              />
             </div>
             <div>
               <ul>

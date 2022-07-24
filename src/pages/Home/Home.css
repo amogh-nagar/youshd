@@ -8,10 +8,18 @@
   font-size: 17px;
   line-height: 101.1%;
   /* or 17px */
-
+  cursor: pointer;
   letter-spacing: 0.05em;
 
   color: #9a9a9a;
+}
+.active-bar {
+    width: 28px;
+    border-radius: 17px;
+    height: 0px;
+    border: 3px solid #329C89;
+    transform: rotate(90deg);
+    background: #329C89;
 }
 .sidebar h4 {
   font-family: "Poppins";
@@ -30,11 +38,13 @@
   height: 17.2px;
 }
 .sidebar {
-  width: 32%;
+  border-right: 1px solid #f0f0f0;
+  width: 27%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-right: 18px;
 }
 .logout {
   position: relative;
@@ -65,18 +75,17 @@
   width: 100px;
   justify-content: space-between;
 }
-.user-name p{
-    font-family: 'Poppins';
-font-style: normal;
-font-weight: 400;
-font-size: 17px;
-line-height: 101.1%;
-/* or 17px */
+.user-name p {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 101.1%;
+  /* or 17px */
 
-letter-spacing: 0.05em;
+  letter-spacing: 0.05em;
 
-color: #3A3A3A;
-
+  color: #3a3a3a;
 }
 .user-name {
   display: flex;
@@ -108,88 +117,87 @@ color: #3A3A3A;
   margin-left: 15px;
 }
 .search {
-    
-    display: flex;
-    width: 100%;
-    position: relative;
-    align-items: center;
-    justify-content: space-between;
-    top: 2.4rem;
+    margin-left: 5px;
+  display: flex;
+  width: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  top: 2.4rem;
 }
-.user-list h3{
-    font-family: 'Poppins';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 101.1%;
-/* or 14px */
+.user-list h3 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 101.1%;
+  /* or 14px */
 
-letter-spacing: 0.05em;
+  letter-spacing: 0.05em;
 
-color: #212121;
+  color: #212121;
 }
-.user-list p{
-    font-family: 'Poppins';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 101.1%;
-/* or 12px */
+.user-list p {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 101.1%;
+  /* or 12px */
 
-letter-spacing: 0.05em;
+  letter-spacing: 0.05em;
 
-color: rgba(33, 33, 33, 0.58);
-}
-
-
-.user-list{
-    display: flex;
-    align-items: center;
-    column-gap: 20px;
-}
-.user-list img{
-    width: 47px;
-    height: 47px;
-}
-.users-modal-nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 11px 2rem;
-}
-.users-modal{
-    position: absolute;
-    width: 524px;
-    height: 77%;
-    left: 26%;
-    /* overflow-y: scroll; */
-    top: 10%;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 28px rgb(72 174 174 / 7%);
-    border-radius: 22px;
-}
-.users-modal-nav p{
-    font-family: 'Poppins';
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 101.1%;
-/* or 18px */
-
-letter-spacing: 0.05em;
-
-color: #212121;
-}
-.users-modal ul{
-    list-style: none;
-    overflow-y: scroll;
-    width: 91%;
-    height: 22rem;
+  color: rgba(33, 33, 33, 0.58);
 }
 
-.backdrop{
-    height: 100vh;
-    width: 100vw;
-    background: rgba(0,0,0,0.5);
-    position: absolute;
+.user-list {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+.user-list img {
+  width: 47px;
+  height: 47px;
+}
+.users-modal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 2rem;
+}
+.users-modal {
+  position: absolute;
+  width: 524px;
+  height: 77%;
+  left: 26%;
+  /* overflow-y: scroll; */
+  top: 10%;
+  background: #ffffff;
+  box-shadow: 0px 0px 28px rgb(72 174 174 / 7%);
+  border-radius: 22px;
+}
+.users-modal-nav p {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 101.1%;
+  /* or 18px */
+
+  letter-spacing: 0.05em;
+
+  color: #212121;
+}
+.users-modal ul {
+  list-style: none;
+  overflow-y: scroll;
+  width: 91%;
+  height: 22rem;
+}
+
+.backdrop {
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
 }

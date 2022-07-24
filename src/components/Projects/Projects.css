@@ -4,6 +4,7 @@
 }
 .projects-bar {
   width: 93%;
+  margin-left: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,6 +40,8 @@
   font-size: 12px;
   line-height: 137.1%;
   /* or 16px */
+
+  word-break: break-word;
 
   color: #6b6b6b;
 }
@@ -79,7 +82,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    width: 98%;
 }
 .row img{
     width: 12px;
@@ -103,6 +106,8 @@
   color: #a4abb3;
 }
 .comments {
+    position: relative;
+    left: 0px;
   display: flex;
   align-items: center;
   width: 20%;
@@ -150,13 +155,17 @@
   color: #212121;
 }
 .listitem {
+    
+    padding-bottom: 3px;
+
+    height: max-content;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 
   width: 92%;
-  height: 159.07px;
+  height: max-content;
   margin-bottom: 10px;
   top: 335.49px;
   background: #ffffff;

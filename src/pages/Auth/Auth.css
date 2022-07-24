@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4rem 1rem;
+  padding: 2rem 1rem;
   justify-content: center;
 }
 .authpage .bar {
@@ -46,18 +46,60 @@
 }
 .authpage form {
   width: 76%;
-  height: 38%;
+  height: 241px !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
+.error{
+  color: #F65B2A;
+  display: flex;
+  align-content: center;
+  width: 78%;
+  column-gap: 10px;
+  justify-content: center;
+}
+.error p{
+  padding: 0;
+margin: 0;
+
+font-size: 11px;
+
+}
+.error img{
+  width: 12px;
+  height: 12px;
+  position: relative;
+  top: 2px;
+}
+.message{
+  font-size: 13px;
+  font-family: 'Poppins';
+  color: #329C89;
+  width: 33%;
+  height: 18px;
+  border-radius: 30px;
+  border: 1px solid #329C89;
+  padding: 2px 13px;
+}
+.bar-underline{
+  width: 17px;
+  height: 0px;
+  border: 2px solid #1A3B58;
+  border-radius: 12px;
+  position: relative;
+  bottom: 15px;
+}
 .bar ul li {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 26px;
-  color: #1a3b58;
+  font-size: 26px;color: rgba(26, 59, 88, 0.33);
+}
+.active{
+  
+  color: #1a3b58 !important;
 }
 .authpage .info h4 {
   font-family: "Poppins";
@@ -72,10 +114,23 @@
   font-weight: 300;
   font-size: 10px;
 }
+label {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 15px;
+  /* identical to box height */
+
+  color: rgba(26, 59, 88, 0.61);
+}
+.bar ul li{
+  cursor: pointer;
+}
 .authpage input {
   width: 314px;
   height: 45px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   padding-left: 25px;
   left: 886px;
   top: 401px;
@@ -87,7 +142,7 @@
 .authpage form button {
   background: #329c89;
   border-radius: 8px;
-  width: 314px;
+  width: 345px;
   height: 45px;
   border: 1px solid transparent;
   color: white;

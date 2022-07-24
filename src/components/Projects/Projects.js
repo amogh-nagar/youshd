@@ -160,6 +160,7 @@ const Projects = () => {
               <p>{projects["todo"].length}</p>
             </div>
             <button
+              style={{ cursor: "pointer" }}
               onClick={() => {
                 var x = {
                   id: Math.random() * 10000,
@@ -219,11 +220,17 @@ const Projects = () => {
                                         data: projects["todo"][index],
                                       });
                                     }}
+                                    style={{ cursor: "pointer" }}
                                     src={threedot}
                                   />
                                 </div>
 
-                                <p className="text">{text}</p>
+                                <p
+                                  style={{ width: "87%", marginLeft: "-2px" }}
+                                  className="text"
+                                >
+                                  {text}
+                                </p>
                                 <div className="writer-info">
                                   <img className="user-pic" src={src} />
                                   <div className="comments">
@@ -297,6 +304,7 @@ const Projects = () => {
                 });
               }}
               className="plus"
+              style={{ cursor: "pointer" }}
             >
               <img src={plusimg} />
             </button>
@@ -330,6 +338,7 @@ const Projects = () => {
                                   {" "}
                                   <h4>{title}</h4>
                                   <img
+                                    style={{ cursor: "pointer" }}
                                     src={threedot}
                                     onClick={() => {
                                       setselected({
@@ -339,7 +348,12 @@ const Projects = () => {
                                     }}
                                   />
                                 </div>
-                                <p className="text">{text}</p>
+                                <p
+                                  style={{ width: "87%", marginLeft: "-2px" }}
+                                  className="text"
+                                >
+                                  {text}
+                                </p>
                                 <div className="writer-info">
                                   <img className="user-pic" src={src} />
                                   <div className="comments">
@@ -413,6 +427,7 @@ const Projects = () => {
                 });
               }}
               className="plus"
+              style={{ cursor: "pointer" }}
             >
               <img src={plusimg} />
             </button>
@@ -446,6 +461,7 @@ const Projects = () => {
                                   {" "}
                                   <h4>{title}</h4>
                                   <img
+                                    style={{ cursor: "pointer" }}
                                     src={threedot}
                                     onClick={() => {
                                       setselected({
@@ -455,7 +471,12 @@ const Projects = () => {
                                     }}
                                   />
                                 </div>
-                                <p className="text">{text}</p>
+                                <p
+                                  style={{ width: "87%", marginLeft: "-2px" }}
+                                  className="text"
+                                >
+                                  {text}
+                                </p>
                                 <div className="writer-info">
                                   <img className="user-pic" src={src} />
                                   <div className="comments">

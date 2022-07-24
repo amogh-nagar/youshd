@@ -35,7 +35,7 @@ const Modal = ({
     <div className="backdrop-modal">
       {!doubleclick && (
         <div className="modal">
-          <img className="cross" onClick={() => setselected({})} src={cross} />
+          <img className="cross" style={{cursor:"pointer"}} onClick={() => setselected({})} src={cross} />
 
           <div
             onDoubleClick={handleDoubleClick}
@@ -68,7 +68,12 @@ const Modal = ({
             paddingTop: "19px",
           }}
         >
-          <img onClick={() => setselected({})} className="cross" src={cross} />
+          <img
+            style={{ cursor: "pointer" }}
+            onClick={() => setselected({})}
+            className="cross"
+            src={cross}
+          />
 
           <div style={{ paddingLeft: "34px" }} className="title">
             <input
@@ -79,7 +84,12 @@ const Modal = ({
           </div>
           <div className="info-container">
             <div className="writer">
-              <p className="dummy">Created By</p>
+              <p
+                className="dummy"
+                style={{ position: "relative", top: "10px" }}
+              >
+                Created By
+              </p>
               <div style={{ marginTop: "18px" }} className="writer-name">
                 <img src={user3} />
                 <p>{writer}</p>
