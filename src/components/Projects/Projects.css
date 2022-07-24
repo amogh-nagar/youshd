@@ -44,7 +44,8 @@
 }
 .listitem h4 {
   width: 100%;
-  margin-left: 28px;
+  margin-left: 13px;
+
   font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
@@ -73,6 +74,18 @@
   /* or 19px */
 
   color: #a4abb3;
+}
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.row img{
+    width: 12px;
+    height: 12px;
+    position: relative;
+    right: 8px;
 }
 .description {
   width: 89%;

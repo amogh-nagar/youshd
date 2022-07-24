@@ -6,96 +6,143 @@ import commentimg from "../../assets/comment.png";
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import user7 from "../../assets/users/user7.png";
+import threedot from "../../assets/more.png";
 import dummyuser from "../../assets/dummy-user.png";
 import user2 from "../../assets/users/user2.png";
 import user3 from "../../assets/users/user3.png";
 import user4 from "../../assets/users/user4.png";
 import user5 from "../../assets/users/user5.png";
 import user6 from "../../assets/users/user6.png";
-const finalSpaceCharacters = [
-  {
-    id: 1,
-    title: "gary",
-    text: "Gary Goodspeed",
-    writer: "/images/gary.png",
-    commentscount: 1,
-    src: user2,
-  },
-];
+import Modal from "./Modal";
 
 const Projects = () => {
-  const [todo, settodo] = useState(finalSpaceCharacters);
-  const [inprogress, setinprogress] = useState([]);
-  const [completed, setcompleted] = useState([]);
   const titleref = useRef();
   const descref = useRef();
-  function handleOnDragEndtodo(result) {
-    if (!result.destination) return;
+  const [selected, setselected] = useState({});
+  var idList = {
+    todo: "todo",
+    inprogress: "inprogress",
+    completed: "completed",
+  };
+  const [projects, setprojects] = useState({
+    todo: [],
+    inprogress: [],
+    completed: [],
+  });
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
 
-    const items = Array.from(todo);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    return result;
+  };
+  const getList = (id) => projects[idList[id]];
 
-    settodo(items);
+  const move = (source, destination, droppableSource, droppableDestination) => {
+    const sourceClone = Array.from(source);
+    const destClone = Array.from(destination);
+    const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+    destClone.splice(droppableDestination.index, 0, removed);
+
+    const result = {};
+    result[droppableSource.droppableId] = sourceClone;
+    result[droppableDestination.droppableId] = destClone;
+
+    return result;
+  };
+  const getListStyle = (isDraggingOver) => ({
+    background: isDraggingOver ? "lightblue" : "lightgrey",
+  });
+  function handleOnDragEnd(result) {
+    const { source, destination } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    // Sorting in same list
+    if (source.droppableId === destination.droppableId) {
+      const items = reorder(
+        getList(source.droppableId),
+        source.index,
+        destination.index
+      );
+
+      setprojects((state) => {
+        return { ...state, [source.droppableId]: items };
+      });
+    }
+    // Interlist movement
+    else {
+      const result = move(
+        getList(source.droppableId),
+        getList(destination.droppableId),
+        source,
+        destination
+      );
+      setprojects((prev) => {
+        return {
+          ...prev,
+          [source.droppableId]: result[source.droppableId],
+          [destination.droppableId]: result[destination.droppableId],
+        };
+      });
+    }
   }
-  function handleOnDragEndcompleted(result) {
-    if (!result.destination) return;
-
-    const items = Array.from(completed);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    setcompleted(items);
-  }
-  function handleOnDragEndinprogress(result) {
-    if (!result.destination) return;
-
-    const items = Array.from(inprogress);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    setinprogress(items);
-  }
+  console.log(selected);
   const keyPressed = (event, list, inx) => {
-    console.log(event);
+    // console.log(event);
     if (event.key === "Enter") {
       var x = [];
       if (list === "todo") {
-        var x = todo.filter((item, index) => index !== inx);
+        var x = projects["todo"].filter((item, index) => index !== inx);
         x.unshift({
-          id: todo.length + 1,
+          id: projects["todo"].length + 1,
           title: titleref.current.value,
           text: descref.current.value,
           writer: "Amogh",
           commentscount: 0,
           src: user2,
         });
-        settodo(x);
+        setprojects((state) => {
+          return { ...state, todo: x };
+        });
       } else if (list === "inprogress") {
-        var x = inprogress.filter((item, index) => index !== inx);
+        var x = projects["inprogress"].filter((item, index) => index !== inx);
         x.unshift({
-          id: inprogress.length + 1,
+          id: projects["inprogress"].length + 1 + 1000,
           title: titleref.current.value,
           text: descref.current.value,
           writer: "Amogh",
           commentscount: 0,
           src: user2,
         });
-        setinprogress(x);
+        setprojects((state) => {
+          return { ...state, inprogress: x };
+        });
       } else {
-        var x = completed.filter((item, index) => index !== inx);
+        var x = projects["completed"].filter((item, index) => index !== inx);
         x.unshift({
-          id: completed.length + 1,
+          id: projects["completed"].length + 1 + 10000,
           title: titleref.current.value,
           text: descref.current.value,
           writer: "Amogh",
           commentscount: 0,
           src: user2,
         });
-        setcompleted(x);
+        setprojects((state) => {
+          return { ...state, completed: x };
+        });
       }
     }
   };
+  const getItemStyle = (isDragging, draggableStyle) => ({
+    background: isDragging ? "lightgreen" : "grey",
+
+    ...draggableStyle,
+  });
+
   return (
     <div className="projects">
       <div className="projects-bar">
@@ -106,38 +153,40 @@ const Projects = () => {
         </div>
       </div>
       <div className="projects-list">
-        <div className="todo">
-          <div className="list-index">
-            <h4>To Do</h4>
-            <p>{todo.length}</p>
-          </div>
-          <button
-            onClick={() => {
-              settodo((prev) => [
-                {
-                  id: Math.random() * 10,
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <div className="todo">
+            <div className="list-index">
+              <h4>To Do</h4>
+              <p>{projects["todo"].length}</p>
+            </div>
+            <button
+              onClick={() => {
+                var x = {
+                  id: Math.random() * 10000,
                   title: "",
                   text: "",
                   src: "",
                   writer: "",
                   commentscount: 0,
-                },
-                ...prev,
-              ]);
-            }}
-            className="plus"
-          >
-            <img src={plusimg} />
-          </button>
-          <DragDropContext onDragEnd={handleOnDragEndtodo}>
-            <Droppable droppableId="todolist">
-              {(provided) => (
+                };
+                setprojects((state) => {
+                  return { ...state, todo: [x, ...state.todo] };
+                });
+              }}
+              className="plus"
+            >
+              <img src={plusimg} />
+            </button>
+
+            <Droppable droppableId="todo">
+              {(provided, snapshot) => (
                 <ul
-                  className="todolist"
+                  className="todo"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
+                  //   style={getListStyle(snapshot.isDraggingOver)}
                 >
-                  {todo.map(
+                  {projects["todo"].map(
                     (
                       { id, title, text, src, writer, commentscount },
                       index
@@ -149,14 +198,31 @@ const Projects = () => {
                             draggableId={id.toString()}
                             index={index}
                           >
-                            {(provided) => (
+                            {(provided, snapshot) => (
                               <li
                                 className="listitem"
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
+                                // style={getItemStyle(
+                                //   snapshot.isDragging,
+                                //   provided.draggableProps.style
+                                // )}
                               >
-                                <h4>{title}</h4>
+                                <div className="row">
+                                  {" "}
+                                  <h4>{title}</h4>
+                                  <img
+                                    onClick={() => {
+                                      setselected({
+                                        list: "todo",
+                                        data: projects["todo"][index],
+                                      });
+                                    }}
+                                    src={threedot}
+                                  />
+                                </div>
+
                                 <p className="text">{text}</p>
                                 <div className="writer-info">
                                   <img className="user-pic" src={src} />
@@ -210,40 +276,38 @@ const Projects = () => {
                 </ul>
               )}
             </Droppable>
-          </DragDropContext>
-        </div>
-        <div className="inprogress">
-          <div className="list-index">
-            <h4>In progress</h4>
-            <p>{inprogress.length}</p>
           </div>
-          <button
-            onClick={() => {
-              setinprogress((prev) => [
-                {
-                  id: Math.random() * 10,
+          <div className="inprogress">
+            <div className="list-index">
+              <h4>In progress</h4>
+              <p>{projects["inprogress"].length}</p>
+            </div>
+            <button
+              onClick={() => {
+                var x = {
+                  id: projects.completed.length + 1000,
                   title: "",
                   text: "",
                   src: "",
                   writer: "",
                   commentscount: 0,
-                },
-                ...prev,
-              ]);
-            }}
-            className="plus"
-          >
-            <img src={plusimg} />
-          </button>
-          <DragDropContext onDragEnd={handleOnDragEndinprogress}>
-            <Droppable droppableId="inprogresslist">
+                };
+                setprojects((state) => {
+                  return { ...state, inprogress: [x, ...state.inprogress] };
+                });
+              }}
+              className="plus"
+            >
+              <img src={plusimg} />
+            </button>
+            <Droppable droppableId="inprogress">
               {(provided) => (
                 <ul
-                  className="inprogresslist"
+                  className="inprogress"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {inprogress.map(
+                  {projects["inprogress"].map(
                     (
                       { id, title, text, src, writer, commentscount },
                       index
@@ -262,7 +326,19 @@ const Projects = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                <h4>{title}</h4>
+                                <div className="row">
+                                  {" "}
+                                  <h4>{title}</h4>
+                                  <img
+                                    src={threedot}
+                                    onClick={() => {
+                                      setselected({
+                                        list: "inprogress",
+                                        data: projects["inprogress"][index],
+                                      });
+                                    }}
+                                  />
+                                </div>
                                 <p className="text">{text}</p>
                                 <div className="writer-info">
                                   <img className="user-pic" src={src} />
@@ -316,40 +392,38 @@ const Projects = () => {
                 </ul>
               )}
             </Droppable>
-          </DragDropContext>
-        </div>
-        <div className="completed">
-          <div className="list-index">
-            <h4>Completed</h4>
-            <p>{completed.length}</p>
           </div>
-          <button
-            onClick={() => {
-              setcompleted((prev) => [
-                {
-                  id: Math.random() * 10,
+          <div className="completed">
+            <div className="list-index">
+              <h4>Completed</h4>
+              <p>{projects["completed"].length}</p>
+            </div>
+            <button
+              onClick={() => {
+                var x = {
+                  id: projects.completed.length + 10000,
                   title: "",
                   text: "",
                   src: "",
                   writer: "",
                   commentscount: 0,
-                },
-                ...prev,
-              ]);
-            }}
-            className="plus"
-          >
-            <img src={plusimg} />
-          </button>
-          <DragDropContext onDragEnd={handleOnDragEndcompleted}>
-            <Droppable droppableId="completedlist">
+                };
+                setprojects((state) => {
+                  return { ...state, completed: [x, ...state.completed] };
+                });
+              }}
+              className="plus"
+            >
+              <img src={plusimg} />
+            </button>
+            <Droppable droppableId="completed">
               {(provided) => (
                 <ul
-                  className="completedlist"
+                  className="completed"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {completed.map(
+                  {projects["completed"].map(
                     (
                       { id, title, text, src, writer, commentscount },
                       index
@@ -368,7 +442,19 @@ const Projects = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                <h4>{title}</h4>
+                                <div className="row">
+                                  {" "}
+                                  <h4>{title}</h4>
+                                  <img
+                                    src={threedot}
+                                    onClick={() => {
+                                      setselected({
+                                        list: "completed",
+                                        data: projects["completed"][index],
+                                      });
+                                    }}
+                                  />
+                                </div>
                                 <p className="text">{text}</p>
                                 <div className="writer-info">
                                   <img className="user-pic" src={src} />
@@ -422,9 +508,18 @@ const Projects = () => {
                 </ul>
               )}
             </Droppable>
-          </DragDropContext>
-        </div>
+          </div>
+        </DragDropContext>
       </div>
+      {selected.data && selected.data["id"] && (
+        <Modal
+          list={selected.list}
+          {...selected.data}
+          setprojects={setprojects}
+          setselected={setselected}
+          projects={projects}
+        />
+      )}
     </div>
   );
 };
